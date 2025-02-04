@@ -11,7 +11,10 @@ function App() {
     e.preventDefault();
     setIsLoading(true);
     setJoke('');
-    const response = await axios.post('http://localhost:3000/api/v1/data', {inputValue});
+    // const response = await axios.post('http://localhost:3000/api/v1/data', {inputValue});
+    const URL = import.meta.env.VITE_URL;
+    // console.log(URL);
+    const response = await axios.post(`${URL}/api/v1/data`, {inputValue});
     setIsLoading(false);
     console.log(response.data);
     setJoke(response.data.joke);
