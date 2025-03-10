@@ -5,10 +5,13 @@ const cors = require("cors");
 const Groq = require('groq-sdk');
 
 app.use(express.json());
-// app.use(express.static('dist'))
-app.use(cors()); // no need when dist folder is present
 
-
+// Configure CORS to allow requests from your frontend
+app.use(cors({
+  origin: "https://topic-joke-generator.vercel.app",
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type"],
+}));
 
 const groq = new Groq({apiKey: process.env.GROQ_API_KEY});
 
@@ -37,19 +40,14 @@ async function getJoke(topic) {
 app.post("/api/v1/get-joke", async (req, res) => {
     const topic = req.body.topic;
     const joke = await getJoke(topic);
-    res.json({joke});
+    res.json({ joke });
 });
 
-// app.use("/api/ping", (req, res) => {
-//   res.send("Server is UP");
-// });
-
-// avoid when dist folder is present
 app.use("/", (req, res) => {
     res.send("Server is UP");
 });
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
