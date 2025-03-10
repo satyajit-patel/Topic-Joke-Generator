@@ -5,7 +5,7 @@ const cors = require("cors");
 const Groq = require('groq-sdk');
 
 app.use(express.json());
-app.use(express.static('dist'))
+// app.use(express.static('dist'))
 app.use(cors()); // no need when dist folder is present
 
 
@@ -40,14 +40,14 @@ app.post("/api/v1/get-joke", async (req, res) => {
     res.json({joke});
 });
 
-app.use("/api/ping", (req, res) => {
-  res.send("Server is UP");
-});
+// app.use("/api/ping", (req, res) => {
+//   res.send("Server is UP");
+// });
 
 // avoid when dist folder is present
-// app.use("/", (req, res) => {
-//     res.send("Server is UP");
-// });
+app.use("/", (req, res) => {
+    res.send("Server is UP");
+});
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
