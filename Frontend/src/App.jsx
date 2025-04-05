@@ -26,7 +26,8 @@ function App() {
   useEffect(() => {
     async function wakeUPCall() {
       try {
-        await axios.post(`${VITE_BACKEND_URL}/api/v1/get-joke`, { topic });
+        const response = await axios.post(`${VITE_BACKEND_URL}/api/v1/get-joke`, { topic: "test" });
+        console.log(response.data);
       } catch (error) {
         console.error("Backend wake-up call failed", error);
       }

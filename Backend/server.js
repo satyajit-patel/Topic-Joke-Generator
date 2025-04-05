@@ -7,11 +7,7 @@ const Groq = require('groq-sdk');
 app.use(express.json());
 
 // Configure CORS to allow requests from your frontend
-app.use(cors({
-  origin: "https://topic-joke-generator.vercel.app",
-  methods: ["GET", "POST"],
-  allowedHeaders: ["Content-Type"],
-}));
+app.use(cors());
 
 const groq = new Groq({apiKey: process.env.GROQ_API_KEY});
 
